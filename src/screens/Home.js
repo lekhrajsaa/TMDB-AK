@@ -15,29 +15,9 @@ import TitleBar from '../components/homeScreen/titleBar';
 import ButtonSeeMore from '../assets/Icon/ButtonSeeMore.svg';
 import CardView from '../components/homeScreen/cardView';
 import axios from 'axios';
+import CardViewVertical from '../components/homeScreen/cardViewVertical';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
-
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    img: require('../assets/Images/image1.png'),
-    title: 'First Item',
-    rating: '8.0',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    img: require('../assets/Images/image1.png'),
-    title: 'Second Item',
-    rating: '8.0',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    img: require('../assets/Images/image1.png'),
-    title: 'Third Item',
-    rating: '8.0',
-  },
-];
 
 function Home() {
   const [asd, setasd] = useState([]);
@@ -69,34 +49,43 @@ function Home() {
         center={<HeadingText text={'FilmKu'} />}
         right={<Notif />}
       />
-      <TitleBar
-        left={<HeadingText text={'Now Showing'} />}
-        right={<ButtonSeeMore />}
-      />
+
       <FlatList
+        ListHeaderComponent={
+          <>
+            <TitleBar
+              left={<HeadingText text={'Now Showing'} />}
+              right={<ButtonSeeMore />}
+            />
+            <FlatList
+              style={{backgroundColor: '#fff'}}
+              data={asd}
+              renderItem={({item}) => (
+                <CardView
+                  title={item.title}
+                  poster_path={item.poster_path}
+                  vote_average={item.vote_average}
+                />
+              )}
+              keyExtractor={item => item.id}
+              horizontal
+            />
+            <TitleBar
+              left={<HeadingText text={'Populer'} />}
+              right={<ButtonSeeMore />}
+            />
+          </>
+        }
         data={asd}
         renderItem={({item}) => (
-          <CardView
+          <CardViewVertical
             title={item.title}
             poster_path={item.poster_path}
             vote_average={item.vote_average}
-          />
-        )}
-        keyExtractor={item => item.id}
-        horizontal
-      />
-
-      <TitleBar
-        left={<HeadingText text={'Populer'} />}
-        right={<ButtonSeeMore />}
-      />
-      <FlatList
-        data={asd}
-        renderItem={({item}) => (
-          <CardView
-            title={item.title}
-            poster_path={item.poster_path}
-            rating={item.rating}
+            movieType1={"HORROR"}
+            movieType2={"MYSTERY"}
+            movieType3={"THRILLER"}
+            MovieDuration={"1h 47m"}
           />
         )}
         keyExtractor={item => item.id}
@@ -107,6 +96,6 @@ function Home() {
 export default Home;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: '#Fff',
   },
 });

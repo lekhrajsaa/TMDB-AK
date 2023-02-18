@@ -35,14 +35,14 @@ const styles = StyleSheet.create({
   item: {
     // margin: 8,
     marginLeft: 16,
-    marginBottom: H * 0.22,
+    // marginBottom: H * 0.22,
   },
   title: {
     fontSize: 14,
     color: '#000',
     paddingVertical: 10,
-    fontFamily: 'Mulish-Regular',
-    fontWeight: '700',
+    fontFamily: 'Mulish-Bold',
+    // fontWeight: '700',
   },
   img: {
     height: H * 0.3,
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#9C9C9C',
     fontFamily: 'Mulish-Regular',
-    fontWeight: '400',
+    // fontWeight: '400',
   },
 });
