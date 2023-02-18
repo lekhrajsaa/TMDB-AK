@@ -10,14 +10,17 @@ import {
 import Star from '../../assets/Icon/Star.svg';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
-export default function CardView({title, poster_path, vote_average}) {
+
+export default function CardView({title, poster_path, vote_average, onPress}) {
   const path = `https://www.themoviedb.org/t/p/w220_and_h330_face${poster_path}`;
   var number = vote_average;
   var rounded = Math.round(number * 10) / 10;
   return (
     <View style={styles.item}>
       <View style={styles.img}>
-        <Image style={styles.img} source={{uri: `${path}`}} />
+        <TouchableOpacity onPress={onPress}>
+          <Image style={styles.img} source={{uri: `${path}`}} />
+        </TouchableOpacity>
       </View>
 
       <View style={{width: W * 0.35}}>
@@ -46,7 +49,9 @@ const styles = StyleSheet.create({
   },
   img: {
     height: H * 0.3,
-    width: W * 0.35,
+    width: W * 0.3813,
+    // height: 212,
+    //width: 143,
     borderRadius: H * 0.01,
     shadowColor: 'black', // for ios
     shadowOpacity: 0.25,

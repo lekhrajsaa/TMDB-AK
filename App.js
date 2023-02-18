@@ -10,6 +10,9 @@ import Bookmark from './src/assets/Icon/Bookmark.svg';
 import Bookmark1 from './src/assets/Icon/Bookmark Copy.svg';
 import Bookmark2 from './src/assets/Icon/Bookmark Copy 2.svg';
 import {SafeAreaView, View, Dimensions} from 'react-native';
+import DetailScreen from './src/screens/Detail';
+import {Provider} from 'react-redux';
+import {store} from './src/redux/store';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const Stack = createNativeStackNavigator();
@@ -76,13 +79,14 @@ function TabN() {
 function App() {
   return (
     <>
-      <Mystatusbar color={'#fff'} />
-
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="Home" component={TabN} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{headerShown: false}}>
+            <Stack.Screen name="Home" component={TabN} />
+            <Stack.Screen name="DetailScreen" component={DetailScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
     </>
   );
 }

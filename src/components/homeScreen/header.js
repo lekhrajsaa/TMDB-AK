@@ -7,9 +7,10 @@ export default function Header({
   right,
   onPressleft,
   onPressright,
+  style,
 }) {
   return (
-    <View style={styles.main}>
+    <View style={[styles.main, {style}]}>
       <View style={styles.left}>
         <TouchableOpacity style={styles.leftTuch} onPress={onPressleft}>
           {left}
@@ -28,11 +29,11 @@ export default function Header({
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     flexDirection: 'row',
     alignContent: 'center',
     paddingVertical: 24,
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
     width: '100%',
   },
   text: {

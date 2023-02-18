@@ -20,6 +20,7 @@ export default function CardViewVertical({
   movieType2,
   movieType3,
   MovieDuration,
+  onPress,
 }) {
   const path = `https://www.themoviedb.org/t/p/w220_and_h330_face${poster_path}`;
   var number = vote_average;
@@ -28,7 +29,9 @@ export default function CardViewVertical({
   return (
     <View style={styles.item}>
       <View style={styles.img}>
-        <Image style={styles.img} source={{uri: `${path}`}} />
+        <TouchableOpacity onPress={onPress}>
+          <Image style={styles.img} source={{uri: `${path}`}} />
+        </TouchableOpacity>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
@@ -59,7 +62,7 @@ export default function CardViewVertical({
 const styles = StyleSheet.create({
   item: {
     // margin: 8,
-    marginLeft: 16,
+    marginLeft: 24,
     marginBottom: H * 0.02,
     flexDirection: 'row',
     backgroundColor: '#fff',
@@ -67,13 +70,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     color: '#000',
-    paddingVertical: 10,
+    paddingVertical: 4,
     fontFamily: 'Mulish-Bold',
     //fontWeight: '700',
   },
   img: {
-    height: H * 0.2,
-    width: W * 0.25,
+    height: H * 0.17,
+    width: W * 0.22,
+    //height: 120,
+    //width: 85,
     borderRadius: H * 0.01,
   },
   rating: {
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Mulish-Regular',
     // fontWeight: '400',
   },
-  textContainer: {width: W * 0.35, marginLeft: 16},
+  textContainer: {width: W * 0.4, marginLeft: 16},
   movieTypeContainer: {
     flexDirection: 'row',
     marginVertical: 8,
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
-    paddingVertical: 6,
+    paddingVertical: 4,
     borderRadius: 20,
     marginRight: 10,
   },

@@ -16,81 +16,109 @@ import ButtonSeeMore from '../assets/Icon/ButtonSeeMore.svg';
 import CardView from '../components/homeScreen/cardView';
 import axios from 'axios';
 import CardViewVertical from '../components/homeScreen/cardViewVertical';
+import Mystatusbar from '../components/myStatusBar';
+import {useDispatch, useSelector} from 'react-redux';
+import {getDataMethod} from '../redux/Action';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 
-function Home() {
-  const [asd, setasd] = useState([]);
-  const axiosdata = async () => {
+function Home({navigation}) {
+  const dispatch = useDispatch();
+  const DATA = useSelector(state => state.Reducers);
+
+  const Moviedata = async () => {
     const response = await axios({
       method: 'get',
       url: 'https://api.themoviedb.org/3/trending/movie/day?api_key=5a284e135bd5c56338884baec64b0829',
     });
-    console.log('data', response.data.results);
-    setasd(response.data.results);
+
+    dispatch(getDataMethod(response.data.results));
     return response;
   };
 
-  const fatchdata = async () => {
-    const response = await fetch(
-      'https://api.themoviedb.org/3/trending/movie/day?api_key=5a284e135bd5c56338884baec64b0829',
-    );
-    const res = await response.json();
-    console.log('data', res.results);
-    return res;
-  };
   useEffect(() => {
-    axiosdata();
+    Moviedata();
   }, []);
   return (
-    <View style={styles.container}>
-      <Header
-        left={<Menu />}
-        center={<HeadingText text={'FilmKu'} />}
-        right={<Notif />}
-      />
+    <>
+      <View style={styles.container}>
+        <Mystatusbar color={'#fff'} barStyle={'dark-content'} />
+        <Header
+          left={<Menu />}
+          center={<HeadingText text={'FilmKu'} />}
+          right={<Notif />}
+        />
 
-      <FlatList
-        ListHeaderComponent={
-          <>
-            <TitleBar
-              left={<HeadingText text={'Now Showing'} />}
-              right={<ButtonSeeMore />}
+        <FlatList
+          ListHeaderComponent={
+            <>
+              <TitleBar
+                left={<HeadingText text={'Now Showing'} />}
+                right={<ButtonSeeMore />}
+              />
+              <FlatList
+                style={{backgroundColor: '#fff', paddingLeft: 8}}
+                data={DATA}
+                renderItem={({item}) => (
+                  <CardView
+                    title={item.title}
+                    poster_path={item.poster_path}
+                    vote_average={item.vote_average}
+                    onPress={() =>
+                      navigation.navigate('DetailScreen', {
+                        poster: item.backdrop_path,
+                        title: item.title,
+                        vote_average: item.vote_average,
+                        Description: item.overview,
+                        movieType1: 'HORROR',
+                        movieType2: 'MYSTERY',
+                        movieType3: 'THRILLER',
+                        MovieDuration: '1h 47m',
+                        MovieLanguage: 'English',
+                        MovieRating: 'PG-13',
+                      })
+                    }
+                  />
+                )}
+                keyExtractor={item => item.id}
+                horizontal
+              />
+              <TitleBar
+                left={<HeadingText text={'Populer'} />}
+                right={<ButtonSeeMore />}
+              />
+            </>
+          }
+          data={DATA}
+          renderItem={({item}) => (
+            <CardViewVertical
+              title={item.title}
+              poster_path={item.poster_path}
+              vote_average={item.vote_average}
+              movieType1={'HORROR'}
+              movieType2={'MYSTERY'}
+              movieType3={'THRILLER'}
+              MovieDuration={'1h 47m'}
+              onPress={() =>
+                navigation.navigate('DetailScreen', {
+                  poster: item.backdrop_path,
+                  title: item.title,
+                  vote_average: item.vote_average,
+                  Description: item.overview,
+                  movieType1: 'HORROR',
+                  movieType2: 'MYSTERY',
+                  movieType3: 'THRILLER',
+                  MovieDuration: '1h 47m',
+                  MovieLanguage: 'English',
+                  MovieRating: 'PG-13',
+                })
+              }
             />
-            <FlatList
-              style={{backgroundColor: '#fff'}}
-              data={asd}
-              renderItem={({item}) => (
-                <CardView
-                  title={item.title}
-                  poster_path={item.poster_path}
-                  vote_average={item.vote_average}
-                />
-              )}
-              keyExtractor={item => item.id}
-              horizontal
-            />
-            <TitleBar
-              left={<HeadingText text={'Populer'} />}
-              right={<ButtonSeeMore />}
-            />
-          </>
-        }
-        data={asd}
-        renderItem={({item}) => (
-          <CardViewVertical
-            title={item.title}
-            poster_path={item.poster_path}
-            vote_average={item.vote_average}
-            movieType1={"HORROR"}
-            movieType2={"MYSTERY"}
-            movieType3={"THRILLER"}
-            MovieDuration={"1h 47m"}
-          />
-        )}
-        keyExtractor={item => item.id}
-      />
-    </View>
+          )}
+          keyExtractor={item => item.id}
+        />
+      </View>
+    </>
   );
 }
 export default Home;
