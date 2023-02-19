@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     marginLeft: 24,
     marginBottom: H * 0.02,
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
   },
   title: {
     fontSize: 14,

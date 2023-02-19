@@ -22,7 +22,7 @@ export default function TitleBar({
 
 const styles = StyleSheet.create({
   main: {
-    backgroundColor: '#fff',
+    //backgroundColor: '#fff',
     flexDirection: 'row',
     alignContent: 'center',
     paddingVertical: 16,

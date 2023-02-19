@@ -13,6 +13,7 @@ import {SafeAreaView, View, Dimensions} from 'react-native';
 import DetailScreen from './src/screens/Detail';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
+import SearchScreen from './src/screens/SearchScreen';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const Stack = createNativeStackNavigator();
@@ -22,12 +23,13 @@ function TabN() {
   return (
     <Tab.Navigator
       screenOptions={{
+        tabBarHideOnKeyboard: true,
         headerShown: false,
         tabBarStyle: {
           height: H * 0.08,
-          borderTopWidth: 12,
-          borderTopColor: '#fff',
-          elevation: 0,
+          //  borderTopWidth: 1,
+          borderTopColor: '#DEDEDE',
+          //  elevation: 0,
         },
       }}>
       <Tab.Screen
@@ -46,7 +48,7 @@ function TabN() {
       />
       <Tab.Screen
         name="Settings"
-        component={Home}
+        component={SearchScreen}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => {
@@ -60,7 +62,7 @@ function TabN() {
       />
       <Tab.Screen
         name="Setti"
-        component={Home}
+        component={DetailScreen}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => {
@@ -82,7 +84,7 @@ function App() {
       <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Home" component={TabN} />
+            <Stack.Screen name="Hom" component={TabN} />
             <Stack.Screen name="DetailScreen" component={DetailScreen} />
           </Stack.Navigator>
         </NavigationContainer>
