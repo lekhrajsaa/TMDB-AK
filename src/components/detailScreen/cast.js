@@ -21,7 +21,8 @@ export default function Cast({source, nam}) {
 
 const styles = StyleSheet.create({
   main: {
-    marginRight: 12,
+    marginRight: 8,
+    width: W * 0.21,
   },
   img: {
     height: W * 0.192,
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     color: '#110E47',
     fontFamily: 'Mulish-Regular',
     fontSize: 12,
-    textAlign: 'center',
+    textAlign: 'left',
     paddingVertical: 6,
   },
 });

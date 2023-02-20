@@ -23,6 +23,7 @@ import MovieDetailBox from '../components/detailScreen/movieDetailBox';
 import TitleBar from '../components/homeScreen/titleBar';
 import HeadingText from '../components/homeScreen/headingText';
 import Cast from '../components/detailScreen/cast';
+import PlayBtn from '../components/detailScreen/PlayBtn';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 export default function DetailScreen({route, navigation}) {
@@ -32,23 +33,23 @@ export default function DetailScreen({route, navigation}) {
 
   const DATA = [
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
+      id: '1',
+      title: 'Tom Holland',
       src: require('../assets/Images/img1.png'),
     },
     {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
+      id: '2',
+      title: 'Zendaya',
       src: require('../assets/Images/img2.png'),
     },
     {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
+      id: '3',
+      title: 'Benedict      Cumberbatch',
       src: require('../assets/Images/img3.png'),
     },
     {
-      id: '58694a0f-3da1-471f-bd96-14',
-      title: 'Third Item',
+      id: '4',
+      title: 'Jacon Batalon',
       src: require('../assets/Images/img4.png'),
     },
   ];
@@ -71,12 +72,7 @@ export default function DetailScreen({route, navigation}) {
         />
       </View>
       <ScrollView>
-        <View style={styles.PlayBtn}>
-          <TouchableOpacity>
-            <ButtonPlay />
-          </TouchableOpacity>
-          <Text style={styles.playText}>Play Trailer</Text>
-        </View>
+        <PlayBtn text={'Play Trailer'} />
         <View style={styles.whiteBox}>
           <View style={styles.textContainer}>
             <View style={styles.bookmarkContainer}>
@@ -144,7 +140,7 @@ const styles = StyleSheet.create({
   img: {
     position: 'absolute',
     top: 0,
-    height: 400,
+    height: H * 0.4,
     width: W,
   },
   title: {
@@ -158,18 +154,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: StatusBar.currentHeight,
   },
-  PlayBtn: {
-    alignSelf: 'center',
-    marginTop: 24,
-    alignItems: 'center',
-    marginBottom: 44,
-  },
-  playText: {
-    fontSize: 12,
-    color: '#fff',
-    fontFamily: 'Mulish-Bold',
-    marginTop: 8,
-  },
+
   whiteBox: {
     backgroundColor: '#fff',
     paddingBottom: 60,
