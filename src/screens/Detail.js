@@ -2,7 +2,6 @@ import React from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
   Image,
   Dimensions,
@@ -13,7 +12,7 @@ import {
 import Header from '../components/homeScreen/header';
 import Menu2 from '../assets/Icon/Menu2.svg';
 import Back from '../assets/Icon/Back.svg';
-import ButtonPlay from '../assets/Icon/ButtonPlay.svg';
+
 import Star from '../assets/Icon/Star.svg';
 import BookMaark from '../assets/Icon/Bookmaark.svg';
 import ButtonSeeMore from '../assets/Icon/ButtonSeeMore.svg';
@@ -77,7 +76,7 @@ export default function DetailScreen({route, navigation}) {
           <View style={styles.textContainer}>
             <View style={styles.bookmarkContainer}>
               <Text style={styles.title}>{route.params.title}</Text>
-              <View style={{position: 'absolute', right: 24, top: 4}}>
+              <View style={styles.BookMaark}>
                 <BookMaark />
               </View>
             </View>
@@ -114,7 +113,7 @@ export default function DetailScreen({route, navigation}) {
             right={<ButtonSeeMore />}
           />
           <FlatList
-            style={{backgroundColor: '#fff', paddingLeft: 24}}
+            style={styles.FlatList}
             data={DATA}
             renderItem={({item}) => <Cast source={item.src} nam={item.title} />}
             keyExtractor={item => item.id}
@@ -198,4 +197,6 @@ const styles = StyleSheet.create({
   bookmarkContainer: {
     flexDirection: 'row',
   },
+  BookMaark: {position: 'absolute', right: 24, top: 4},
+  FlatList: {backgroundColor: '#fff', paddingLeft: 24},
 });

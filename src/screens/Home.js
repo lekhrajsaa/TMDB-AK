@@ -1,14 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-  Text,
-  Image,
-  StatusBar,
-  ActivityIndicator,
-} from 'react-native';
+import {View, StyleSheet, Dimensions, FlatList, StatusBar} from 'react-native';
 import Header from '../components/homeScreen/header';
 import Menu from '../assets/Icon/Menu.svg';
 import Notif from '../assets/Icon/Notif.svg';
@@ -21,6 +12,7 @@ import CardViewVertical from '../components/homeScreen/cardViewVertical';
 import Mystatusbar from '../components/myStatusBar';
 import {useDispatch, useSelector} from 'react-redux';
 import {getDataMethod} from '../redux/Action';
+import MyActivityIndicator from '../components/common/MyActivityIndicator';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 
@@ -61,10 +53,7 @@ function Home({navigation}) {
           />
         </View>
         {loading ? (
-          <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <ActivityIndicator size="small" color="#88A4E8" />
-          </View>
+          <MyActivityIndicator />
         ) : (
           <FlatList
             ListHeaderComponent={
@@ -74,7 +63,7 @@ function Home({navigation}) {
                   right={<ButtonSeeMore />}
                 />
                 <FlatList
-                  style={{paddingLeft: 8}}
+                  style={styles.flatList}
                   data={DATA}
                   renderItem={({item}) => (
                     <CardView
@@ -165,4 +154,5 @@ const styles = StyleSheet.create({
   header: {
     marginTop: StatusBar.currentHeight,
   },
+  flatList: {paddingLeft: 8},
 });
