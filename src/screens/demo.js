@@ -7,7 +7,7 @@ import {
   testIDLeft,
 } from 'react-native';
 
-export default function Header({
+export default function Demo({
   left,
   center,
   right,
@@ -17,7 +17,7 @@ export default function Header({
   testIDLeft,
 }) {
   return (
-    <View style={[styles.main, {style}]}>
+    <View style={[styles.main, {style}]} testID={"demo"} >
       <View style={styles.left}>
         <TouchableOpacity
           style={styles.leftTuch}

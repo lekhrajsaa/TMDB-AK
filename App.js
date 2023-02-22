@@ -9,11 +9,12 @@ import Menu from './src/assets/Icon/Menu.svg';
 import Bookmark from './src/assets/Icon/Bookmark.svg';
 import Bookmark1 from './src/assets/Icon/Bookmark Copy.svg';
 import Bookmark2 from './src/assets/Icon/Bookmark Copy 2.svg';
-import {SafeAreaView, View, Dimensions} from 'react-native';
+import {SafeAreaView, View, Dimensions, TouchableOpacity} from 'react-native';
 import DetailScreen from './src/screens/Detail';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
 import SearchScreen from './src/screens/SearchScreen';
+import Demo from './src/screens/demo';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 const Stack = createNativeStackNavigator();
@@ -50,6 +51,7 @@ function TabN() {
         name="Settings"
         component={SearchScreen}
         options={{
+          tabBarTestID: 'SearchBtn',
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => {
             return (
@@ -62,7 +64,7 @@ function TabN() {
       />
       <Tab.Screen
         name="Setti"
-        component={DetailScreen}
+        component={Demo}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => {

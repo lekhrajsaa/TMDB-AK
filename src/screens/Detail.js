@@ -54,7 +54,7 @@ export default function DetailScreen({route, navigation}) {
   ];
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={'detailScreen'}>
       <Mystatusbar
         barStyle={'light-content'}
         color={'transparent'}
@@ -65,6 +65,7 @@ export default function DetailScreen({route, navigation}) {
       </View>
       <View style={styles.header}>
         <Header
+          testIDLeft={'BackBtn'}
           left={<Back />}
           onPressleft={() => navigation.goBack()}
           right={<Menu2 />}

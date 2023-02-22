@@ -37,7 +37,7 @@ function Home({navigation}) {
   }, []);
   return (
     <>
-      <View style={styles.container}>
+      <View style={styles.container} testID={'HomeScreen'}>
         <View style={styles.left} />
         <View style={styles.Right} />
         <Mystatusbar
@@ -56,6 +56,7 @@ function Home({navigation}) {
           <MyActivityIndicator />
         ) : (
           <FlatList
+            testID={'Popular'}
             ListHeaderComponent={
               <>
                 <TitleBar
@@ -67,6 +68,7 @@ function Home({navigation}) {
                   data={DATA}
                   renderItem={({item}) => (
                     <CardView
+                      testID={'NowShowing'}
                       title={item.title}
                       poster_path={item.poster_path}
                       vote_average={item.vote_average}
@@ -99,6 +101,7 @@ function Home({navigation}) {
             data={DATA}
             renderItem={({item}) => (
               <CardViewVertical
+                testID={'PopularItems'}
                 title={item.title}
                 poster_path={item.poster_path}
                 vote_average={item.vote_average}

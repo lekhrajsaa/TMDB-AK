@@ -22,6 +22,7 @@ import CardViewVertical from '../components/homeScreen/cardViewVertical';
 import Mystatusbar from '../components/myStatusBar';
 import {useDispatch, useSelector} from 'react-redux';
 import {getDataMethod} from '../redux/Action';
+import MyActivityIndicator from '../components/common/MyActivityIndicator';
 const H = Dimensions.get('window').height;
 const W = Dimensions.get('window').width;
 
@@ -34,10 +35,10 @@ function SearchScreen({navigation}) {
 
   const [text, onChangeText] = useState('');
 
-  const MovieSearchdata = async () => {
+  const MovieSearchdata = async url => {
     const response = await axios({
       method: 'get',
-      url: `https://api.themoviedb.org/3/search/movie?api_key=5a284e135bd5c56338884baec64b0829&language=en-US&&query=${text}`,
+      url: url,
     });
     setSearchData(response.data.results);
     setMovieData(DATA);
@@ -47,11 +48,16 @@ function SearchScreen({navigation}) {
   };
 
   useEffect(() => {
-    MovieSearchdata();
-  });
+    const TimeOut = setTimeout(() => {
+      MovieSearchdata(
+        `https://api.themoviedb.org/3/search/movie?api_key=5a284e135bd5c56338884baec64b0829&language=en-US&&query=${text}`,
+      );
+    }, .800);
+    return () => clearTimeout(TimeOut);
+  }, [text]);
   return (
     <>
-      <View style={styles.container}>
+      <View style={styles.container} testID={'searchScreen'}>
         <View style={styles.left} />
         <View style={styles.Right} />
         <Mystatusbar
@@ -67,6 +73,7 @@ function SearchScreen({navigation}) {
           />
           <View style={styles.searchBoxContainer}>
             <TextInput
+              testID="searchBox"
               onChangeText={onChangeText}
               value={text}
               placeholder={'search movies'}
@@ -77,10 +84,7 @@ function SearchScreen({navigation}) {
         </View>
 
         {loading ? (
-          <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <ActivityIndicator size="small" color="#88A4E8" />
-          </View>
+          <MyActivityIndicator />
         ) : (
           <>
             <TitleBar
